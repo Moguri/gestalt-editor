@@ -12,7 +12,7 @@ panda3d.core.load_prc_file(
 )
 
 
-class GameApp(ShowBase):
+class EditorApp(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
         pman.shim.init(self)
@@ -31,7 +31,7 @@ class GameApp(ShowBase):
 
 
 def main():
-    app = GameApp()
+    app = EditorApp()
     app.run()
 
 if __name__ == '__main__':
