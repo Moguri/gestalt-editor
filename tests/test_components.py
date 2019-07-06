@@ -1,6 +1,7 @@
 #pylint:disable=redefined-outer-name
 import inspect
-import unittest.mock
+
+from direct.showbase.ShowBase import ShowBase
 
 
 import pytest
@@ -9,9 +10,9 @@ import pytest
 from gestalt import components
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def showbase():
-    return unittest.mock.MagicMock()
+    return ShowBase()
 
 
 EDITOR_COMPONENTS = [
