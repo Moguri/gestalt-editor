@@ -16,6 +16,9 @@ class GameApp(ShowBase):
         pman.shim.init(self)
         self.accept('escape', sys.exit)
 
+        self.cam.set_pos(10, -10, 10)
+        self.cam.look_at(0, 0, 0)
+
 
 def main():
     app = GameApp()
