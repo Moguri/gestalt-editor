@@ -3,4 +3,4 @@ sudo: required
 dist: xenial
 python:
   - '3.7'
-script: pman test
+script: python setup.py test
