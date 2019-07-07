@@ -1,6 +1,7 @@
 #pylint:disable=redefined-outer-name
 import inspect
 
+import panda3d.core as p3d
 from direct.showbase.ShowBase import ShowBase
 
 
@@ -12,7 +13,10 @@ from gestalt import components
 
 @pytest.fixture(scope='session')
 def showbase():
-    return ShowBase()
+    p3d.load_prc_file_data('', 'window-type none')
+    base = ShowBase()
+    base.cam = p3d.NodePath('camera')
+    return base
 
 
 EDITOR_COMPONENTS = [
