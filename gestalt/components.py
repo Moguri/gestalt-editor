@@ -5,6 +5,7 @@ from direct.showbase.DirectObject import DirectObject
 
 import gestalt.assetlibrary
 import gestalt.floorplane
+import gestalt.sceneexporter
 
 
 class EditorComponent(DirectObject):
@@ -43,8 +44,19 @@ class ViewportComponent(EditorComponent):
         self.camera.look_at(0, 0, 0)
 
         # Try to load a model
+        modelpath = None
         if len(sys.argv) > 1:
             modelpath = sys.argv[1]
             self.assetlib.import_file(modelpath)
             model_root = self.assetlib.libraries[0]
             self.scene_root.attach_new_node(model_root)
+
+        if modelpath is not None:
+            exportpath = p3d.Filename().from_os_specific(modelpath)
+            exportpath = exportpath.get_fullpath_wo_extension() + '.bam'
+            self.accept('x', self.save_scene_to_bam, [exportpath])
+
+    def save_scene_to_bam(self, exportpath):
+        exporter = gestalt.sceneexporter.SceneExporter()
+        print(f'Exporting scene to {exportpath}')
+        exporter.export(self.scene_root, exportpath)
